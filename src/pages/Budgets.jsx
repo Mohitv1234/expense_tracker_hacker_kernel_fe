@@ -39,7 +39,7 @@ function Budgets() {
     const fetchData = async () => {
         try {
             setLoading(true);
-            const catRes = await getCategories();
+            const catRes = await getCategories(true);
             const catData = catRes?.data?.data || catRes?.data || [];
             setCategories(
                 createListCollection({

@@ -300,7 +300,10 @@ function Transactions() {
                                                         item
                                                             .TransactionType
                                                             ?.name ===
-                                                            'income'
+                                                            'Income' || item
+                                                            .TransactionType
+                                                            ?.name ===
+                                                            'Loan' && item.description == 'borrowed'
                                                             ? '#dcfce7'
                                                             : '#fee2e2'
                                                     }
@@ -308,7 +311,10 @@ function Transactions() {
                                                         item
                                                             .TransactionType
                                                             ?.name ===
-                                                            'income'
+                                                            'Income' || item
+                                                            .TransactionType
+                                                            ?.name ===
+                                                            'Loan' && item.description == 'borrowed'  
                                                             ? 'green.600'
                                                             : 'red.500'
                                                     }
@@ -339,7 +345,10 @@ function Transactions() {
                                                     item
                                                         .TransactionType
                                                         ?.name ===
-                                                        'income'
+                                                        'Income' || item
+                                                        .TransactionType
+                                                        ?.name ===
+                                                        'Loan' && item.description == 'borrowed'
                                                         ? 'green.500'
                                                         : 'red.400'
                                                 }

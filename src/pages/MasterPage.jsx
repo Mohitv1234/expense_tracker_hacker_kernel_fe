@@ -313,7 +313,7 @@ function Master() {
         async () => {
             if (
                 !categoryForm.name ||
-                !categoryForm.type
+                !categoryForm.transaction_type_id
             ) {
                 alert(
                     'Please fill category details'
@@ -573,12 +573,6 @@ function Master() {
                         Categories
                     </Tabs.Trigger>
 
-                    <Tabs.Trigger
-                        value='transactions'
-                        rounded='lg'
-                    >
-                        Transaction Types
-                    </Tabs.Trigger>
 
                     <Tabs.Trigger
                         value='tags'
@@ -934,27 +928,6 @@ function Master() {
 
                                     <Field.Root>
                                         <Field.Label>
-                                            Type
-                                        </Field.Label>
-
-                                        <Input
-                                            h='48px'
-                                            bg='gray.50'
-                                            placeholder='expense / income'
-                                            value={
-                                                categoryForm.type
-                                            }
-                                            onChange={e =>
-                                                setCategoryForm({
-                                                    ...categoryForm,
-                                                    type: e.target.value,
-                                                })
-                                            }
-                                        />
-                                    </Field.Root>
-
-                                    <Field.Root>
-                                        <Field.Label>
                                             Transaction Type
                                         </Field.Label>
 
@@ -1079,14 +1052,14 @@ function Master() {
                                                             <Table.Cell>
                                                                 <Badge
                                                                     colorPalette={
-                                                                        item.type ===
-                                                                            'income'
-                                                                            ? 'green'
-                                                                            : 'red'
+                                                                        item.TransactionType?.name ===
+                                                                            'Income' ? 'green' : item.TransactionType?.name ===
+                                                                            'Expense' ? 'red'
+                                                                            : 'blue'
                                                                     }
                                                                 >
                                                                     {
-                                                                        item.type
+                                                                        item?.TransactionType?.name
                                                                     }
                                                                 </Badge>
                                                             </Table.Cell>

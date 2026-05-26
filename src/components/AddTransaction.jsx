@@ -259,7 +259,6 @@ function AddTransactionDialog({ onSuccess, initialData, triggerElement, title })
                                     title: initialData?.title || '',
                                     amount: initialData?.amount || '',
                                     description: initialData?.description || '',
-                                    payment_method: initialData?.payment_method || '',
                                     account_id: initialData?.account_id ? String(initialData.account_id) : '',
                                     category_id: initialData?.category_id ? String(initialData.category_id) : '',
                                     transaction_type_id: initialData?.transaction_type_id ? String(initialData.transaction_type_id) : '',
@@ -634,45 +633,6 @@ function AddTransactionDialog({ onSuccess, initialData, triggerElement, title })
                                                     </Select.Root>
                                                 </Field.Root>
 
-                                                {/* PAYMENT */}
-
-                                                <Field.Root>
-                                                    <Field.Label
-                                                        mb={2}
-                                                        fontWeight={
-                                                            '600'
-                                                        }
-                                                        color={
-                                                            'gray.700'
-                                                        }
-                                                    >
-                                                        Payment Method
-                                                    </Field.Label>
-
-                                                    <Input
-                                                        name='payment_method'
-                                                        placeholder='UPI / Cash / Card'
-                                                        bg={'gray.50'}
-                                                        border={
-                                                            '1px solid #e5e7eb'
-                                                        }
-                                                        rounded={'xl'}
-                                                        h={'52px'}
-                                                        px={4}
-                                                        value={
-                                                            values.payment_method
-                                                        }
-                                                        onChange={
-                                                            handleChange
-                                                        }
-                                                        _focus={{
-                                                            borderColor:
-                                                                '#8b5cf6',
-                                                            boxShadow:
-                                                                '0 0 0 1px #8b5cf6',
-                                                        }}
-                                                    />
-                                                </Field.Root>
 
                                                 {/* DATE */}
 

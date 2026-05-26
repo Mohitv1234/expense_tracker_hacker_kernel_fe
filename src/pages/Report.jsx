@@ -550,7 +550,10 @@ function Reports() {
                                                             item
                                                                 .TransactionType
                                                                 ?.name ===
-                                                                'income'
+                                                                'Income' || (item
+                                                                .TransactionType
+                                                                ?.name ===
+                                                                'Loan' && item.description == 'borrowed')
                                                                 ? 'green.500'
                                                                 : 'red.400'
                                                         }

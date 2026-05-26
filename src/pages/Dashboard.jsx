@@ -33,7 +33,9 @@ export default function ExpenseDashboard() {
     totalBalance: 0,
     totalIncome: 0,
     totalExpense: 0,
-    recentTransactions: []
+    recentTransactions: [],
+    weeklyData: [],
+    categoryData: []
   })
   const [monthlyData, setMonthlyData] = useState([])
   const [loading, setLoading] = useState(true)
@@ -97,23 +99,6 @@ export default function ExpenseDashboard() {
     },
   ]
 
-  // Hardcoded for now until backend analytics supports these
-  const weeklyData = [
-    { day: 'Mon', amount: 4000 },
-    { day: 'Tue', amount: 2500 },
-    { day: 'Wed', amount: 5200 },
-    { day: 'Thu', amount: 3100 },
-    { day: 'Fri', amount: 6200 },
-    { day: 'Sat', amount: 4100 },
-    { day: 'Sun', amount: 7200 },
-  ]
-
-  const budgetData = [
-    { name: 'Food', value: 40 },
-    { name: 'Shopping', value: 25 },
-    { name: 'Bills', value: 20 },
-    { name: 'Travel', value: 15 },
-  ]
 
   const COLORS = ['#8b5cf6', '#a78bfa', '#c4b5fd', '#ddd6fe']
 
@@ -268,13 +253,13 @@ export default function ExpenseDashboard() {
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
-                  data={budgetData}
-                  dataKey="value"
+                  data={stats.categoryData.map(ele=>({...ele, name:ele.category}))}
+                  dataKey="amount"
                   innerRadius={60}
                   outerRadius={90}
                   paddingAngle={5}
                 >
-                  {budgetData.map((entry, index) => (
+                  {stats.categoryData.map((entry, index) => (
                     <Cell
                       key={index}
                       fill={COLORS[index % COLORS.length]}
@@ -287,7 +272,7 @@ export default function ExpenseDashboard() {
             </ResponsiveContainer>
           </Box>
 
-          {budgetData.map((item, index) => (
+          {stats.categoryData.map((item, index) => (
             <Flex
               key={index}
               justifyContent={'space-between'}
@@ -303,12 +288,12 @@ export default function ExpenseDashboard() {
                 />
 
                 <Text color={'gray.600'}>
-                  {item.name}
+                  {item.category}
                 </Text>
               </Flex>
 
               <Text fontWeight={'bold'}>
-                {item.value}%
+                {item.amount}%
               </Text>
             </Flex>
           ))}
@@ -330,7 +315,7 @@ export default function ExpenseDashboard() {
 
         <Box h={'300px'}>
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={weeklyData}>
+            <AreaChart data={stats.weeklyData}>
               <defs>
                 <linearGradient
                   id="colorExpense"
@@ -417,7 +402,7 @@ export default function ExpenseDashboard() {
 
           <Table.Body>
             {stats.recentTransactions.map((item, index) => {
-                const isIncome = item.transaction_type_id === 1;
+                const isIncome = item.TransactionType.name == 'Income' || (item.TransactionType.name == 'Loan' && item.description == 'borrowed');
                 return (
               <Table.Row key={index}>
                 <Table.Cell>{item.title}</Table.Cell>

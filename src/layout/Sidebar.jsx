@@ -10,6 +10,8 @@ import {
 } from '@chakra-ui/react'
 
 import {
+  FiUser,
+  FiPocket,
   FiGrid,
   FiCreditCard,
   FiPieChart,
@@ -39,7 +41,7 @@ export default function Sidebar() {
     },
     {
       name: 'Budgets',
-      icon: FiPieChart, // reusing pie chart or could import FiTarget
+      icon: FiPocket, // reusing pie chart or could import FiTarget
       path: '/budgets',
     },
     {
@@ -54,7 +56,7 @@ export default function Sidebar() {
     },
     {
       name: 'Profile',
-      icon: FiSettings, // using settings icon for profile as it fits the context
+      icon: FiUser, // using settings icon for profile as it fits the context
       path: '/profile',
     },
   ]

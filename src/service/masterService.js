@@ -50,10 +50,10 @@ export const deleteAccount = async id => {
 // ========================================
 
 export const getCategories =
-    async () => {
+    async (isBudget) => {
         const response =
             await axiosInstance.get(
-                '/categories'
+                isBudget ? '/categories?is_budget=1' : '/categories'
             )
 
         return response.data
