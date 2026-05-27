@@ -44,3 +44,12 @@ export const deleteLoan = async (id) => {
         throw error.response?.data || error;
     }
 };
+
+export const sendReminder = async (formData)=>{
+    try {
+        const response = await axiosInstance.get(`/loan/payment-reminder`);
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error;
+    }
+}
