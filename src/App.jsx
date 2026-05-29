@@ -10,7 +10,6 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <Layout/>
-        <Socket/>
       </BrowserRouter>
       <CustomToast />
     </Provider>

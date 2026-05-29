@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { getCurrentUser } from '../service/authService'
 import { setProfile } from '../store/profileSlice'
+import Socket from '../components/Socket'
 
 function App() {
   const [user, setUser] = useState(null);
@@ -13,8 +14,16 @@ function App() {
     if(localStorage.getItem('authentication-token')){
       (async ()=>{
         const response = await getCurrentUser();
-        setUser(response.data);
-        dispatch(setProfile(response.data));
+        if(response.data){
+          setUser(response.data);
+          dispatch(setProfile(response.data));
+          if(window.location.pathname.includes('login')){
+            window.location.replace('/')
+          }
+        }else{
+          localStorage.setItem('authentication-token', '');
+          window.location.reload();
+        }
       })()
     }
   },[])
@@ -35,6 +44,7 @@ function App() {
       >
         <RoutesComponent />
       </Box>
+        {user && <Socket/>}
     </Flex>
   )
 }

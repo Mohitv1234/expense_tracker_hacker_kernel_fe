@@ -47,7 +47,7 @@ export const deleteLoan = async (id) => {
 
 export const sendReminder = async (formData)=>{
     try {
-        const response = await axiosInstance.get(`/loan/payment-reminder`);
+        const response = await axiosInstance.post(`/loan/payment-reminder`, formData);
         return response.data;
     } catch (error) {
         throw error.response?.data || error;

@@ -41,6 +41,11 @@ export const getCurrentUser = async () => {
 
         return response.data
     } catch (error) {
+        // if(error.status==401){
+        //     localStorage.clear();
+        //     window.location.replace('/login')
+        // };
+        
         throw error.response?.data || error
     }
 }

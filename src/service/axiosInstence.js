@@ -50,7 +50,7 @@ axiosInstance.interceptors.response.use(
 
     // Unauthorized
     if (status === 401) {
-      localStorage.removeItem('token')
+      localStorage.clear()
 
       CustomToast({
         title: 'Unauthorized',

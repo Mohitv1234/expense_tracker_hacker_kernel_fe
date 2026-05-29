@@ -472,7 +472,7 @@ const PaymentReminderDailog = ({selectedLoan })=>{
     const [payBtnLoading, setPayBtnLoading] = useState(false);
     const [reminderForm, setReminderForm] = useState({
         userId: '',
-        notificationMode: '',
+        notificationMode: 'application',
         mobileNumber: '',
         email: '',
         title: '',
@@ -486,7 +486,7 @@ const PaymentReminderDailog = ({selectedLoan })=>{
     const clearPaymentFormData = ()=>{
          setReminderForm({
             userId: '',
-            notificationMode: '',
+            notificationMode: 'application',
             mobileNumber: '',
             email: '',
             title: '',
@@ -509,7 +509,7 @@ const PaymentReminderDailog = ({selectedLoan })=>{
 
     const handleSendReminder = async () => {
         try {
-            await sendReminder(null);
+            await sendReminder(reminderForm);
         } catch (error) {
             console.log(error);
             alert(error.message || 'Error making payment');
@@ -554,7 +554,7 @@ const PaymentReminderDailog = ({selectedLoan })=>{
                                         <Select.Root
                                             collection={accounts}
                                             value={reminderForm.userId}
-                                            onValueChange={e => setReminderForm({ ...reminderForm, userId: e.value })}
+                                            onValueChange={e => setReminderForm({ ...reminderForm, userId: e.value, notificationMode:'application' })}
                                         >
                                         <Select.HiddenSelect />
                                         <Select.Control>
@@ -577,9 +577,9 @@ const PaymentReminderDailog = ({selectedLoan })=>{
                                     <Field.Root>
                                         <Field.Label>Email</Field.Label>
                                         <Input
-                                            h='48px' bg='gray.50' type='number' placeholder='Email'
+                                            h='48px' bg='gray.50' type='email' placeholder='Email'
                                             value={reminderForm.email}
-                                            onChange={e => setPayForm({ ...reminderForm, email: e.target.value })}
+                                            onChange={e => setReminderForm({ ...reminderForm, email: e.target.value, notificationMode:'email' })}
                                         />
                                     </Field.Root>
                                 </Tabs.Content>
@@ -590,7 +590,7 @@ const PaymentReminderDailog = ({selectedLoan })=>{
                                         <Input
                                             h='48px' bg='gray.50' type='number' placeholder='Contact Number'
                                             value={reminderForm.mobileNumber}
-                                            onChange={e => setPayForm({ ...reminderForm, mobileNumber: e.target.value })}
+                                            onChange={e => setReminderForm({ ...reminderForm, mobileNumber: e.target.value,  notificationMode:'phone'})}
                                         />
                                     </Field.Root>
                                 </Tabs.Content>
@@ -600,9 +600,9 @@ const PaymentReminderDailog = ({selectedLoan })=>{
                                 <Field.Root>
                                     <Field.Label>Title</Field.Label>
                                     <Input
-                                        h='48px' bg='gray.50' type='number' placeholder='Reminder Title'
+                                        h='48px' bg='gray.50' type='text' placeholder='Reminder Title'
                                         value={reminderForm.title}
-                                        onChange={e => setPayForm({ ...reminderForm, title: e.target.value })}
+                                        onChange={e => setReminderForm({ ...reminderForm, title: e.target.value })}
                                     />
                                 </Field.Root>
                                 <Field.Root mt={2}>
@@ -610,7 +610,7 @@ const PaymentReminderDailog = ({selectedLoan })=>{
                                     <Textarea
                                         h='48px' bg='gray.50' type='number' placeholder='write your message here'
                                         value={reminderForm.content}
-                                        onChange={e => setPayForm({ ...reminderForm, content: e.target.value })}
+                                        onChange={e => setReminderForm({ ...reminderForm, content: e.target.value })}
                                     />
                                 </Field.Root>
                             </Box>
